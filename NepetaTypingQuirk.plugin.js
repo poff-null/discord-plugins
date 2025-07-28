@@ -3,7 +3,7 @@
  * @version 1.0.3
  * @author poff_null
  * @description Nepeta's typing quirk. With cat puns!
- * @source https://github.com/poff-null/NepetaTypingQuirk
+ * @source https://github.com/poff-null/discord-plugins/blob/main/NepetaTypingQuirk.plugin.js
  */
 
 module.exports = class NepetaTypingQuirk {
