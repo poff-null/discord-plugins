@@ -210,7 +210,7 @@ module.exports = class NepetaTypingQuirk {
 
   start() {
     BdApi.Patcher.before(
-      "VriskaTypingQuirk",
+      "NepetaTypingQuirk",
       BdApi.Webpack.getModule(m => m?.sendMessage),
       "sendMessage",
       (_, args) => {
@@ -226,6 +226,6 @@ module.exports = class NepetaTypingQuirk {
   }
 
   stop() {
-    BdApi.Patcher.unpatchAll("VriskaTypingQuirk");
+    BdApi.Patcher.unpatchAll("NepetaTypingQuirk");
   }
 };
