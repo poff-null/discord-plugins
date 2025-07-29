@@ -1,8 +1,8 @@
 /**
  * @name Nepeta'sTypingQuirk
- * @version 1.0.3
+ * @version 1.1
  * @author poff_null
- * @description Nepeta's typing quirk. With cat puns!
+ * @description Nepeta's typing quirk. With cat puns! Now with URL Protection.
  * @source https://github.com/poff-null/discord-plugins/blob/main/NepetaTypingQuirk.plugin.js
  */
 
@@ -187,23 +187,45 @@ module.exports = class NepetaTypingQuirk {
 ];
   }
 
-start() {
-BdApi.Patcher.before("NepetaTypingQuirk", 
-BdApi.Webpack.getModule(m => m?.sendMessage), "sendMessage", 
-(_, args) => {
-const message = args[1];
-  if (!message.content) return;           
+  // Function to process text while protecting URLs
+  processText(content) {
+    // First, extract and store all URLs
+    const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/gi;
+    const urls = [];
+    let urlMatch;
+    // Store all URLs and replace them with placeholders
+    let protectedText = content.replace(urlRegex, (match) => {
+      urls.push(match);
+      return `__URL_PLACEHOLDER_${urls.length - 1}__`;
+    });
     this.quirkPatterns.forEach(pattern => {
-      message.content = message.content.replace(pattern.regex, pattern.replace);
+      protectedText = protectedText.replace(pattern.regex, pattern.replace);
+    });
+    protectedText = protectedText.replace(/__URL_PLACEHOLDER_(\d+)__/g, (_, index) => {
+      return urls[parseInt(index)];
     });
 
-    if (message.content.trim() === "") {
-        message.content = "‎";
-    }
-});
-    }
+    return protectedText;
+  }
 
-    stop() {
-        BdApi.Patcher.unpatchAll("NepetaTypingQuirk");
-    }
+  start() {
+    BdApi.Patcher.before(
+      "VriskaTypingQuirk",
+      BdApi.Webpack.getModule(m => m?.sendMessage),
+      "sendMessage",
+      (_, args) => {
+        const message = args[1];
+        if (!message.content) return;
+        message.content = this.processText(message.content);
+
+        if (message.content.trim() === "") {
+          message.content = "‎";
+        }
+      }
+    );
+  }
+
+  stop() {
+    BdApi.Patcher.unpatchAll("VriskaTypingQuirk");
+  }
 };
