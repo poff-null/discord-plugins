@@ -9,6 +9,8 @@
 module.exports = class NepetaTypingQuirk {
   constructor() {
     this.quirkPatterns = [
+      // theese are where the quirks will be defined
+        // cat puns
       {
         name: "purrfect",
         regex: /(perfect)/gi,
@@ -174,6 +176,7 @@ module.exports = class NepetaTypingQuirk {
         regex: /(amazing)/gi,
         replace: "ameowzing"
       },
+        // other replacements
       {
         name: "E Replacement",
         regex: /[eE][eE]/g,
