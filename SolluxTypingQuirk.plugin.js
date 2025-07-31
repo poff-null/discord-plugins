@@ -9,6 +9,7 @@
 module.exports = class SolluxTypingQuirk {
   constructor() {
     this.quirkPatterns = [
+      // theese are where the quirks will be defined
       {
         name: "i replacement",
         regex: /[iI]/gi,
