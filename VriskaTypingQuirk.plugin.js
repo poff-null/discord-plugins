@@ -9,6 +9,7 @@
 module.exports = class VriskaTypingQuirk {
   constructor() {
     this.quirkPatterns = [
+      // theese are where the quirks will be defined
         // 8 Soundalikes
       {
         name: "b8",
