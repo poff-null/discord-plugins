@@ -22,13 +22,8 @@ module.exports = class SolluxTypingQuirk {
       },
       {
         name: "to",
-        regex: /\s(to)\s/gi,
-        replace: "two "
-      },
-      {
-        name: "too",
-        regex: /\s(too)\s/gi,
-        replace: "two "
+        regex: /(to)/gi,
+        replace: "two"
       },
     ];
   }
