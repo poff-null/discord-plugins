@@ -1,26 +1,61 @@
 /**
- * @name EridanTypingQuirk
- * @version 1.0.0
+ * @name Equius'sTypingQuirk
+ * @version 1.1
  * @author poff_null
- * @description Eridan's typing quirk. Now with URL Protection.
- * @source https://github.com/poff-null/discord-plugins/blob/main/EridanTypingQuirk.plugin.js
+ * @description Equius's typing quirk. Now with URL Protection.
+ * @source https://github.com/poff-null/discord-plugins/blob/main/EquiusTypingQuirk.plugin.js
  */
 
-module.exports = class EridanTypingQuirk {
+module.exports = class EquiusTypingQuirk {
   constructor() {
     this.quirkPatterns = [
       // theese are where the quirks will be defined
       {
-        name: "v replacement",
-        regex: /[vV]/gi,
-        replace: "vv"
+        name: "loo",
+        regex: /(loo)/gi,
+        replace: "100"
       },
       {
-        name: "w replacement",
-        regex: /[wW]/gi,
-        replace: "ww"
+        name: "ool",
+        regex: /(ool)/gi,
+        replace: "001"
       },
-    ];
+      {
+        name: "nay",
+        regex: /(nay)/gi,
+        replace: "neigh"
+      },
+      {
+        name: "strong",
+        regex: /(strong)/gi,
+        replace: "STRONG"
+      },
+      {
+        name: "strength",
+        regex: /(strength)/gi,
+        replace: "STRONGNESS"
+      },
+      {
+        name: "strongnesscaps",
+        regex: /(strongness)/gi,
+        replace: "STRONGNESS"
+      },
+      {
+        name: "cross",
+        regex: /(cross)/gi,
+        replace: "%"
+      },
+      {
+        name: "E Replacement",
+        regex: /[xX]/g,
+        replace: "%"
+      },
+      {
+        name: "Prefix",
+        regex: /^/,
+        replace: "D --> "
+      }
+];
   }
 
   // Function to process text while protecting URLs
@@ -46,7 +81,7 @@ module.exports = class EridanTypingQuirk {
 
   start() {
     BdApi.Patcher.before(
-      "EridanTypingQuirk",
+      "EquiusTypingQuirk",
       BdApi.Webpack.getModule(m => m?.sendMessage),
       "sendMessage",
       (_, args) => {
@@ -62,6 +97,6 @@ module.exports = class EridanTypingQuirk {
   }
 
   stop() {
-    BdApi.Patcher.unpatchAll("EridanTypingQuirk");
+    BdApi.Patcher.unpatchAll("EquiusTypingQuirk");
   }
 };

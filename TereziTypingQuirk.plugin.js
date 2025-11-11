@@ -2,8 +2,8 @@
  * @name TereziTypingQuirk
  * @version 1.0.0
  * @author poff_null
- * @description Terezi's typing quirk
- * @source https://github.com/poff-null/discord-plugins/blob/main/SolluxTypingQuirk.plugin.js
+ * @description Terezi's typing quirk. Now with URL Protection.
+ * @source https://github.com/poff-null/discord-plugins/blob/main/TereziTypingQuirk.plugin.js
  */
 
 module.exports = class TereziTypingQuirk {
