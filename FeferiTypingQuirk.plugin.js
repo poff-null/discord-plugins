@@ -2,7 +2,7 @@
  * @name FeferiTypingQuirk
  * @version 1.0.1
  * @author poff_null
- * @description Feferi' typing quirk. Now with URL Protection. 
+ * @description Feferi' typing quirk. Now with URL Protection. Fish puns soon!
  * @source https://github.com/poff-null/discord-plugins/blob/main/EridanTypingQuirk.plugin.js
  */
 
