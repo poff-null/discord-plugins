@@ -54,8 +54,8 @@ module.exports = class EquiusTypingQuirk {
         name: "Prefix",
         regex: /^/,
         replace: "D --> "
-      }
-];
+      },
+    ];
   }
 
   // Function to process text while protecting URLs

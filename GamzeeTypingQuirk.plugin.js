@@ -1,35 +1,33 @@
 /**
- * @name SolluxTypingQuirk
- * @version 1.0.1
+ * @name Gamzee'sTypingQuirk
+ * @version 1.1
  * @author poff_null
- * @description Sollux's typing quirk. With ii and two! Now with URL protection. Works with caps.
- * @source https://github.com/poff-null/discord-plugins/blob/main/SolluxTypingQuirk.plugin.js
+ * @description Gamzee's typing quirk. Now with URL Protection. This quirk will not keep track of the caps between each message.
+ * @source https://github.com/poff-null/discord-plugins/blob/main/GamzeeTypingQuirk.plugin.js
  */
 
-module.exports = class SolluxTypingQuirk {
+module.exports = class GamzeeTypingQuirk {
   constructor() {
     this.quirkPatterns = [
       // theese are where the quirks will be defined
       {
-        name: "i replacement",
-        regex: /[i]/g,
-        replace: "ii"
-      },
-      {
-        name: "I replacement",
-        regex: /[I]/g,
-        replace: "II"
-      },
-      {
-        name: "s replacement",
-        regex: /[sS]/gi,
-        replace: "2"
-      },
-      {
-        name: "to",
-        regex: /(to)/gi,
-        replace: "two"
-      },
+        name: "Alternating Caps",
+        regex: /[\s\S]*/,
+        replace: (match) => {
+          let upper = true;
+          return match
+            .split('')
+            .map(char => {
+              if (/[A-Za-z]/.test(char)) {
+                const out = upper ? char.toUpperCase() : char.toLowerCase();
+                upper = !upper;
+                return out;
+              }
+              return char;
+            })
+            .join('');
+        }
+      }
     ];
   }
 
@@ -56,7 +54,7 @@ module.exports = class SolluxTypingQuirk {
 
   start() {
     BdApi.Patcher.before(
-      "SolluxTypingQuirk",
+      "GamzeeTypingQuirk",
       BdApi.Webpack.getModule(m => m?.sendMessage),
       "sendMessage",
       (_, args) => {
@@ -72,6 +70,6 @@ module.exports = class SolluxTypingQuirk {
   }
 
   stop() {
-    BdApi.Patcher.unpatchAll("SolluxTypingQuirk");
+    BdApi.Patcher.unpatchAll("GamzeeTypingQuirk");
   }
 };

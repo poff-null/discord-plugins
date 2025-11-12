@@ -1,35 +1,29 @@
 /**
- * @name SolluxTypingQuirk
+ * @name FeferiTypingQuirk
  * @version 1.0.1
  * @author poff_null
- * @description Sollux's typing quirk. With ii and two! Now with URL protection. Works with caps.
- * @source https://github.com/poff-null/discord-plugins/blob/main/SolluxTypingQuirk.plugin.js
+ * @description Feferi' typing quirk. Now with URL Protection. 
+ * @source https://github.com/poff-null/discord-plugins/blob/main/EridanTypingQuirk.plugin.js
  */
 
-module.exports = class SolluxTypingQuirk {
+module.exports = class FeferiTypingQuirk {
   constructor() {
     this.quirkPatterns = [
       // theese are where the quirks will be defined
-      {
-        name: "i replacement",
-        regex: /[i]/g,
-        replace: "ii"
-      },
-      {
-        name: "I replacement",
-        regex: /[I]/g,
-        replace: "II"
-      },
-      {
-        name: "s replacement",
-        regex: /[sS]/gi,
-        replace: "2"
-      },
-      {
-        name: "to",
-        regex: /(to)/gi,
-        replace: "two"
-      },
+{
+  name: "H replacement",
+  regex: /H/g,
+  replace: ")("
+},
+{
+  name: "capital E sequences",
+  // match one or more capital E's in a row
+  regex: /E+/g,
+  replace: (match) => {
+    if (match.length === 1) return "-E"; // single E
+    return "-".repeat(match.length - 1) + "E"; // e.g. EEEEEE -> -----E
+  }
+}
     ];
   }
 
@@ -56,7 +50,7 @@ module.exports = class SolluxTypingQuirk {
 
   start() {
     BdApi.Patcher.before(
-      "SolluxTypingQuirk",
+      "FeferiTypingQuirk",
       BdApi.Webpack.getModule(m => m?.sendMessage),
       "sendMessage",
       (_, args) => {
@@ -72,6 +66,6 @@ module.exports = class SolluxTypingQuirk {
   }
 
   stop() {
-    BdApi.Patcher.unpatchAll("SolluxTypingQuirk");
+    BdApi.Patcher.unpatchAll("FeferiTypingQuirk");
   }
 };
