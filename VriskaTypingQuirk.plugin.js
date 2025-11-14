@@ -1,8 +1,8 @@
 /**
  * @name Vriska'sTypingQuirk
- * @version 1.1
+ * @version 1.2
  * @author poff_null
- * @description Vriska's typing quirk. With 8 soundalikes! Now with URL protection.
+ * @description Vriska's typing quirk. With 8 soundalikes! Now with STRONG URL protection.
  * @source https://github.com/poff-null/discord-plugins/blob/main/VriskaTypingQuirk.plugin.js
  */
 
@@ -113,23 +113,26 @@ module.exports = class VriskaTypingQuirk {
 
   // Function to process text while protecting URLs
   processText(content) {
-    // First, extract and store all URLs
     const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/gi;
-    const urls = [];
-    let urlMatch;
-    // Store all URLs and replace them with placeholders
+    const urlPlaceholders = [];
+    let placeholderId = 0;
     let protectedText = content.replace(urlRegex, (match) => {
-      urls.push(match);
-      return `__URL_PLACEHOLDER_${urls.length - 1}__`;
+      const placeholder = `§${placeholderId}¶${Date.now()}¤`;
+      urlPlaceholders.push({ placeholder, url: match });
+      placeholderId++;
+      return placeholder;
     });
     this.quirkPatterns.forEach(pattern => {
       protectedText = protectedText.replace(pattern.regex, pattern.replace);
     });
-    protectedText = protectedText.replace(/__URL_PLACEHOLDER_(\d+)__/g, (_, index) => {
-      return urls[parseInt(index)];
+    urlPlaceholders.forEach(({ placeholder, url }) => {
+      protectedText = protectedText.replace(new RegExp(this.escapeRegExp(placeholder), 'g'), url);
     });
 
     return protectedText;
+  }
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   start() {

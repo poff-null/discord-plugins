@@ -1,8 +1,8 @@
 /**
  * @name SolluxTypingQuirk
- * @version 1.0.1
+ * @version 1.1
  * @author poff_null
- * @description Sollux's typing quirk. With ii and two! Now with URL protection. Works with caps.
+ * @description Sollux's typing quirk. With ii and two! Now with STRONG URL protection. Works with caps.
  * @source https://github.com/poff-null/discord-plugins/blob/main/SolluxTypingQuirk.plugin.js
  */
 
@@ -33,25 +33,28 @@ module.exports = class SolluxTypingQuirk {
     ];
   }
 
-  // Function to process text while protecting URLs
   processText(content) {
-    // First, extract and store all URLs
+    // Use symbol-based placeholders that won't match any word patterns
     const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/gi;
-    const urls = [];
-    let urlMatch;
-    // Store all URLs and replace them with placeholders
+    const urlPlaceholders = [];
+    let placeholderId = 0;
     let protectedText = content.replace(urlRegex, (match) => {
-      urls.push(match);
-      return `__URL_PLACEHOLDER_${urls.length - 1}__`;
+      const placeholder = `§${placeholderId}¶${Date.now()}¤`;
+      urlPlaceholders.push({ placeholder, url: match });
+      placeholderId++;
+      return placeholder;
     });
     this.quirkPatterns.forEach(pattern => {
       protectedText = protectedText.replace(pattern.regex, pattern.replace);
     });
-    protectedText = protectedText.replace(/__URL_PLACEHOLDER_(\d+)__/g, (_, index) => {
-      return urls[parseInt(index)];
+    urlPlaceholders.forEach(({ placeholder, url }) => {
+      protectedText = protectedText.replace(new RegExp(this.escapeRegExp(placeholder), 'g'), url);
     });
 
     return protectedText;
+  }
+  escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
   start() {
