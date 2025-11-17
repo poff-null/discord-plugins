@@ -1,8 +1,8 @@
 /**
  * @name Vriska'sTypingQuirk
- * @version 1.2
+ * @version 1.3
  * @author poff_null
- * @description Vriska's typing quirk. With 8 soundalikes! Now with STRONG URL protection.
+ * @description Vriska's typing quirk. With more 8 soundalikes by https://x.com/ImpactAri! Now with STRONG URL protection.
  * @source https://github.com/poff-null/discord-plugins/blob/main/VriskaTypingQuirk.plugin.js
  */
 
@@ -87,11 +87,7 @@ module.exports = class VriskaTypingQuirk {
         replace: "w8r"
       },
             // Basic B replacement
-      {
-        name: "B Replacement",
-        regex: /[bB]/g,
-        replace: "8"
-      },
+
         // Ate, Ait, and Eight replacements
       {
         name: "ate Replacement",
@@ -106,6 +102,109 @@ module.exports = class VriskaTypingQuirk {
       {
         name: "eight Replacement",
         regex: /(eight)/gi,
+        replace: "8"
+      },
+{
+  name: "cre8",
+  regex: /(create)/gi,
+  replace: "cre8"
+},
+{
+  name: "upd8",
+  regex: /(update)/gi,
+  replace: "upd8"
+},
+{
+  name: "d8",
+  regex: /(date)/gi,
+  replace: "d8"
+},
+{
+  name: "f8",
+  regex: /(fate)/gi,
+  replace: "f8"
+},
+{
+  name: "r8",
+  regex: /(rate)/gi,
+  replace: "r8"
+},
+{
+  name: "m8",
+  regex: /(mate)/gi,
+  replace: "m8"
+},
+{
+  name: "st8",
+  regex: /(state)/gi,
+  replace: "st8"
+},
+{
+  name: "h8",
+  regex: /(hate)/gi,
+  replace: "h8"
+},
+{
+  name: "activ8",
+  regex: /(activate)/gi,
+  replace: "activ8"
+},
+{
+  name: "celebr8",
+  regex: /(celebrate)/gi,
+  replace: "celebr8"
+},
+{
+  name: "transl8",
+  regex: /(translate)/gi,
+  replace: "transl8"
+},
+{
+  name: "educ8",
+  regex: /(educate)/gi,
+  replace: "educ8"
+},
+{
+  name: "calcul8",
+  regex: /(calculate)/gi,
+  replace: "calcul8"
+},
+{
+  name: "communic8",
+  regex: /(communicate)/gi,
+  replace: "communic8"
+},
+{
+  name: "particip8",
+  regex: /(participate)/gi,
+  replace: "particip8"
+},
+{
+  name: "weight",
+  regex: /(weight)/gi,
+  replace: "w8"
+},
+{
+  name: "fr8",
+  regex: /(freight)/gi,
+  replace: "fr8"
+},
+
+{
+  name: "str8",
+  regex: /(straight)/gi,
+  replace: "str8"
+},
+{
+  name: "tr8",
+  regex: /(trait)/gi,
+  replace: "tr8"
+},
+
+// normal replacement(s)
+      {
+        name: "B Replacement",
+        regex: /[bB]/g,
         replace: "8"
       },
     ];
