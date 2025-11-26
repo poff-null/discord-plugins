@@ -241,11 +241,6 @@ module.exports = class FeferiTypingQuirk {
     replace: "insmanatee"
   },
   {
-    name: "s(’)chool",
-    regex: /(it’s cool|s'cool)/gi,
-    replace: "s(’)chool"
-  },
-  {
     name: "koi",
     regex: /(coy)/gi,
     replace: "koi"
@@ -277,7 +272,7 @@ module.exports = class FeferiTypingQuirk {
   },
   {
     name: "betta",
-    regex: /(bet|better|betcha)/gi,
+    regex: /(bet|better|betcha|beta)/gi,
     replace: "betta"
   },
   {
@@ -344,11 +339,6 @@ module.exports = class FeferiTypingQuirk {
     name: "pracfishing",
     regex: /(practicing)/gi,
     replace: "pracfishing"
-  },
-  {
-    name: "anemone",
-    regex: /(enemy|any)/gi,
-    replace: "anemone"
   },
   {
     name: "moby",

@@ -1,8 +1,8 @@
 /**
  * @name Gamzee'sTypingQuirk
- * @version 1.2
+ * @version 1.3
  * @author poff_null
- * @description Gamzee's typing quirk. Now with STRONG URL Protection. This quirk will not keep track of the caps between each message.
+ * @description Gamzee's typing quirk. Now with STRONG URL Protection. This quirk will not keep track of the caps between each message. made it so that it excludes the clown nose in :o) from capitalizing
  * @source https://github.com/poff-null/discord-plugins/blob/main/GamzeeTypingQuirk.plugin.js
  */
 
@@ -10,24 +10,38 @@ module.exports = class GamzeeTypingQuirk {
   constructor() {
     this.quirkPatterns = [
       // theese are where the quirks will be defined
-      {
-        name: "Alternating Caps",
-        regex: /[\s\S]*/,
-        replace: (match) => {
-          let upper = true;
-          return match
-            .split('')
-            .map(char => {
-              if (/[A-Za-z]/.test(char)) {
-                const out = upper ? char.toUpperCase() : char.toLowerCase();
-                upper = !upper;
-                return out;
-              }
-              return char;
-            })
-            .join('');
+{
+  name: "Alternating Caps",
+  regex: /[\s\S]*/,
+  replace: (match) => {
+    let upper = false;
+    let inEmoji = false;
+    
+    return match
+      .split('')
+      .map((char, index, array) => {
+        // Check if we're entering an emoji section
+        if (char === ':' && array[index + 1] !== ' ') {
+          inEmoji = true;
         }
-      }
+        if (char === ')' && inEmoji) {
+          inEmoji = false;
+          return char;
+        }
+        if (inEmoji) {
+          return char;
+        }
+        if (/[A-Za-z]/.test(char)) {
+          const out = upper ? char.toUpperCase() : char.toLowerCase();
+          upper = !upper;
+          return out;
+        }
+        
+        return char;
+      })
+      .join('');
+  }
+}
     ];
   }
   processText(content) {
